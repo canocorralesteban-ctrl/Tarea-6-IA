@@ -1,12 +1,3 @@
-/******************************** Timer MACROS Configuration *********************************
- * @subject: Inteligencia Artificial
- * @file: BSP.h
- * @hardware: ESP32 (PANTHER48)
- * @author: Paulina Cabriales, Esteban Cano
- * @doente: Dr. Juan Alberto Ramirez Quintana
- * @date: 12/Octubre/2026
- * @overview: Archivo de librerias y definiciones de la tarea 6
- *********************************************************************************************/
 #ifndef BSP_H
 #define BSP_H
 
@@ -22,7 +13,7 @@
 #include "esp_attr.h"
 #include "esp32/rom/ets_sys.h"
 #include <unistd.h> 
-#include "driver/gpio.h" 	    	         	
+#include "driver/gpio.h"
 #include "hal/gpio_types.h"
 #include "esp_timer.h"
 #include "esp_adc/adc_oneshot.h"
@@ -31,13 +22,19 @@ extern const char *TAG;
 
 //Definiciones de pines
 #define BOTON 18
-#define LED 2
+#define LED 2            // LED de estado (RUN/OFF)
+#define LED_SALIDA 17    // LED de salida del XOR
 #define UMBRAL_ADC 2048
-#define NUM_POTS_2 2
+#define NUM_POTS_2 2     // XOR de 2 entradas: siempre 2 pots
 
 // Variables globales compartidas en el proyecto
 extern volatile bool system_ON;
 extern volatile bool state_led;
+
+extern int adc_raw[NUM_POTS_2];
+extern int X_inputs[NUM_POTS_2];
+
+extern const adc_channel_t pot_channels[NUM_POTS_2];
 
 // Prototipos de funciones
 void gpio_init(void);
