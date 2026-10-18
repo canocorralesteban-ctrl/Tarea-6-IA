@@ -3,11 +3,9 @@
  * @file: GPIO.c
  * @hardware: ESP32 (PANTHER48)
  * @author: Paulina Cabriales, Armando Garcia, Esteban Cano
- * @date: 12/Octubre/2026
+ * @date: 17/Octubre/2026
  * @overview: Archivo de funciones para uso de GPIO de la tarea 6
  *********************************************************************************************/
-
-// Falta agregar led de salida
 
 #include "BSP.h"
 
@@ -15,13 +13,17 @@ const char *TAG = "GPIO";
 
 void gpio_init()
 {
-    gpio_reset_pin(LED);                                  // Resetea el pin
-    gpio_set_direction(LED,GPIO_MODE_OUTPUT);       // Configura el pin como salida
+    gpio_reset_pin(LED);                     // Resetea el pin
+    gpio_set_direction(LED,GPIO_MODE_OUTPUT);// Configura el pin como salida
     gpio_set_level(LED, false);       
+
+//    gpio_reset_pin(LED_SALIDA);                     // Resetea el pin del LED de salida
+//    gpio_set_direction(LED_SALIDA,GPIO_MODE_OUTPUT);// Lo configura como salida
+//    gpio_set_level(LED_SALIDA, false);              // Empieza apagado
     
-    gpio_reset_pin(BOTON);                                // resetea el pin
-	gpio_set_direction(BOTON, GPIO_MODE_INPUT);     // Se configura como entrada
-	gpio_set_pull_mode(BOTON, GPIO_PULLUP_ONLY);    // Se activa resistencia pull-up
+    gpio_reset_pin(BOTON);                 // resetea el pin
+	gpio_set_direction(BOTON, GPIO_MODE_INPUT);// Se configura como entrada
+	gpio_set_pull_mode(BOTON, GPIO_PULLUP_ONLY);// Se activa resistencia pull-up
 }
 
 bool boton_presionado(void)
