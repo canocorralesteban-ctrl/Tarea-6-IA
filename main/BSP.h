@@ -22,8 +22,8 @@ extern const char *TAG;
 
 //Definiciones de pines
 #define BOTON 18
-#define LED 2            // LED de estado (RUN/OFF)
-#define LED_SALIDA 17    // LED de salida del XOR
+#define LED 17            // LED de estado (RUN/OFF)
+#define LED_SALIDA 2    // LED de salida del XOR
 #define UMBRAL_ADC 2048
 #define NUM_POTS_2 2     // XOR de 2 entradas: siempre 2 pots
 

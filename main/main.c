@@ -9,11 +9,11 @@
 
 #include "BSP.h"
 
-// Variables globales declaradas en BSP.h (aqui se definen)
+// Variables globales declaradas en BSP.h 
 volatile bool system_ON = false;
 volatile bool state_led = false;
 
-// Pesos de la red (REEMPLAZAR por los del notebook cuando los tengan)
+
 double w01 = -7.3870172501;
 double w11 = 15.9740314484;
 double w12 = 15.4625444412;
@@ -25,17 +25,18 @@ double v1  = 17.0284881592;
 double v2  = -16.7011604309;
 
 // Funcion escalon con umbral cero
-int escalon(double entrada_neta) {
+bool escalon(double entrada_neta) {
     if (entrada_neta >= 0.0)
-        return 1;
+        return true;
     else
-        return 0;
+        return false;
 }
 
 // Red XOR: calcula las 3 neuronas, imprime y regresa la salida
-int red_xor(double x1, double x2) {
+bool red_xor(double x1, double x2) {
     double u1, u2, u3;
-    int h1, h2, salida;
+    bool h1, h2;
+    bool salida;
 
     // Neurona oculta 1 (OR)
     u1 = w01 + w11*x1 + w12*x2;
@@ -56,19 +57,30 @@ int red_xor(double x1, double x2) {
 }
 
 void app_main(void) {
-    int contador = 0;   // cuenta ciclos de 10 ms
-    int salida;
+    int contador = 0;   
+    bool salida;
 
     gpio_init();
     adc_init();
 
+    ESP_LOGI( TAG, "preione el boton para encender/apagar el sistema" );
     while (true) {
-        // Boton: alterna entre OFF y RUN
+
+        
         if (boton_presionado()) {
             system_ON = !system_ON;
-            gpio_set_level(LED, system_ON);
+            if(system_ON)
+            {
+                printf("sistema activo \n");
+                gpio_set_level(LED, system_ON);
+            }
+                
             if (!system_ON)
-                gpio_set_level(LED_SALIDA, 0);   // apaga el LED de salida al parar
+            {
+                printf("sistema inactivo \n");
+                gpio_set_level(LED, system_ON);
+            }
+                  
             contador = 0;
         }
 
