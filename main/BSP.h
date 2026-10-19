@@ -22,10 +22,10 @@ extern const char *TAG;
 
 //Definiciones de pines
 #define BOTON 18
-#define LED 17            // LED de estado (RUN/OFF)
-#define LED_SALIDA 2    // LED de salida del XOR
+#define LED 2           // LED de estado del sistema
+#define LED_SALIDA 17    // LED de salida del XOR
 #define UMBRAL_ADC 2048
-#define NUM_POTS_2 2     // XOR de 2 entradas: siempre 2 pots
+#define NUM_POTS_2 2     // XOR de 2 entradas
 
 // Variables globales compartidas en el proyecto
 extern volatile bool system_ON;
@@ -42,5 +42,8 @@ bool boton_presionado(void);
 void adc_init(void);
 void adc_read(void);
 void adc_to_binary(void);
+
+bool escalon(double entrada);
+bool xor(double x1, double x2);
 
 #endif

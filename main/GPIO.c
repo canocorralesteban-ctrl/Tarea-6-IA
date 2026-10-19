@@ -15,7 +15,7 @@ void gpio_init()
 {
     gpio_reset_pin(LED);                     // Resetea el pin
     gpio_set_direction(LED,GPIO_MODE_OUTPUT);// Configura el pin como salida
-    gpio_set_level(LED, false);       
+    gpio_set_level(LED, false);                //empieza apagado
 
     gpio_reset_pin(LED_SALIDA);                     // Resetea el pin del LED de salida
     gpio_set_direction(LED_SALIDA,GPIO_MODE_OUTPUT);// Lo configura como salida
@@ -29,7 +29,7 @@ void gpio_init()
 bool boton_presionado(void)
 {
     static bool btn_state_old = true;
-    bool btn_state = gpio_get_level(BOTON);
+     bool btn_state = gpio_get_level(BOTON);
 
     bool presionado = (btn_state_old && !btn_state);
 
